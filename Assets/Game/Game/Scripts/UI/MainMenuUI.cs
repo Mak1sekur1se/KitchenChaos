@@ -18,5 +18,9 @@ public class MainMenuUI : MonoBehaviour
         quitButton.onClick.AddListener(() => {
             Application.Quit();
         });
+
+        //暂停跳转回来后时间继续
+        Time.timeScale = 1f;
+
     }
 }

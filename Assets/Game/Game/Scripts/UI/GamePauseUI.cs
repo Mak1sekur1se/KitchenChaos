@@ -14,16 +14,18 @@ public class GamePauseUI : MonoBehaviour
     {
         mainMenuButton.onClick.AddListener( () =>
         {
-            KitchenGameManager.Instance.TogglePauseGame();
+            Loader.Load(Loader.Scene.MainMenuScene);
+
         });
         resumeButton.onClick.AddListener( () =>
         {
-            Loader.Load(Loader.Scene.MainMenuScene);
+            KitchenGameManager.Instance.TogglePauseGame();
         });
         optionsButton.onClick.AddListener(() =>
         {
             //打开选项UI
-            OptionsUI.Instance.Show();
+            Hide();
+            OptionsUI.Instance.Show(Show);
         });
     }
 
@@ -48,6 +50,8 @@ public class GamePauseUI : MonoBehaviour
     private void Show()
     {
         gameObject.SetActive(true);
+
+        resumeButton.Select();//手柄操作
     }
 
     private void Hide()

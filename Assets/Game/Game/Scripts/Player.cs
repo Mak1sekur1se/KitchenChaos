@@ -114,6 +114,7 @@ public class Player : MonoBehaviour,IKitchenObjectParent
         
     }
 
+#warning 检查一下移动代码
     private void HandleMovement()
     {
         Vector2 inputVector = gameInput.GetMoveVectorNormalized();
@@ -134,7 +135,7 @@ public class Player : MonoBehaviour,IKitchenObjectParent
 
             //Attempt only X movement
             Vector3 moveDirx = new Vector3(moveDir.x, 0, 0).normalized;
-            canMove = moveDir.x != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirx, moveDistance);
+            canMove = (moveDir.x < -.5f || moveDir.x > +.5f) && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirx, moveDistance);
 
             if (canMove)
             {
@@ -145,7 +146,7 @@ public class Player : MonoBehaviour,IKitchenObjectParent
             else
             {
                 Vector3 moveDirz = new Vector3(0, 0, moveDir.z).normalized;
-                canMove = moveDir.z != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirz, moveDistance);
+                canMove = (moveDir.z < -.5f || moveDir.z > +.5f) && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirz, moveDistance);
 
                 if (canMove) { moveDir = moveDirz; }
             }
